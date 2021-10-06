@@ -1,16 +1,20 @@
-import { INCREASE, DECREASE, RESET, CHANGE_NAME } from "./actions";
-
+import {INCREASE, DECREASE, CLEAR_CART, REMOVE} from './actions';
 // reducer
 export const reducer = (state, action) => {
-    // console.log({state, action})
-    if(action.type === DECREASE) {
-      return {...state, count: state.count - 1}
-    } else if(action.type === INCREASE) {
-      return {...state, count: state.count + 1}
-    } else if(action.type === RESET) {
-      return {...state, count: 0}
-    } else if(action.type === CHANGE_NAME) { 
-      return {...state, name: 'varbuzz'}
+    if(action.type === CLEAR_CART) {
+        return {...state, cart: []}; 
     }
+    if(action.type === DECREASE) {
+        console.log('decrease'); 
+    }
+    if(action.type === INCREASE) {
+        console.log('increase'); 
+
+    }
+    if(action.type === REMOVE) {
+        const updatedCart = state.cart.filter(item => item.id !== action.payload.id); 
+        return {...state, cart: updatedCart}
+    }
+
     return state;
   }; 
